@@ -37,6 +37,16 @@ ol {
   list-style: none;
 }
 
+.visually-hidden {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* Кастомный скроллбар */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
@@ -67,13 +77,135 @@ ol {
 .search-form {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+}
+
+.search-form__fieldset-title{
+  font-size: 18px; 
+  font-weight: 400;
+  padding-bottom: 5px;
+}
+
+.search-form__fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.search-form__label {
+  display: flex;
+}
+
+.search-form__textfield {
+  border: 1px solid #fff;
+  border-left: none;
+  border-right: none;
+  background: transparent;
+  appearance: none;
+  min-width: 225px;
+  color: #fff;
+  font-family: 'Fira Sans Condensed';
+  font-size: 18px;
+}
+
+.search-form__textfield:active {
+  border: none;
+}
+
+.search-form__textfield:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 1px;
+}
+
+::placeholder {
+  font-family: 'Fira Sans Condensed';
+  color: rgb(255, 255, 255 / 0.7);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.search-form__checkbox-list {
+  display: flex;
+  gap: 17px;
+}
+
+.search-form__label-text {
+  padding-left: 5px;
+}
+
+.search-form__label-text:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.search-form__pseudo-checkbox {
+  width: 15px;
+  height: 15px;
+  outline: 1px solid #fff; 
+  outline-offset: 1px;
+  background-color: transparent; /* Фон прозрачный */
+  align-self: center;
+  margin-left: 2px;
+}
+
+.search-form__pseudo-checkbox::after {
+  content: '';
+  display: block;
+  width: 15px; 
+  height: 15px;
+  background-color: white; 
+  opacity: 0; 
+  cursor: pointer;
+}
+
+.search-form__checkbox:checked + .search-form__pseudo-checkbox::after {
+  opacity: 1; 
+}
+
+.search-form__label:has(.search-form__checkbox:focus-visible) {
+  outline: 1px solid #fff;
+}
+
+.button {
+  font-family: 'Fira Sans Condensed';
+  background-color: transparent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  border: 1px solid #fff;
+  padding: 6px 73.5px;
+  align-self: flex-end;
+}
+
+.button:active {
+  background-color: #545050;
+}
+
+.button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.button:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 1px;
+}
+
+.title {
+  font-family:'Oswald';
+  text-transform: uppercase;
+  font-size: 75px;
+  line-height: 94%;
+}
+
+.content__accent {
+  color: #545050;
 }
 
 .result__video-container {
   width: 711px;
   height: 386px;
   margin-bottom: 16px;
+  position: relative;
 }
 
 .result__video {
@@ -82,11 +214,12 @@ ol {
   object-fit: cover;
 }
 
-
 .content__list-container {
-  width: 399px;
   height: 298px;
-  overflow: scroll;
+  margin-top: 26px;
+  overflow: auto;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .content__details {
@@ -101,14 +234,68 @@ ol {
 }
 
 .content__list-item {
-  
+  padding: 0 3px 0 3px;
+}
+
+.content__card-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.content__card-link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.content__card-link:focus {
+  outline: none;
+}
+
+.content__card-link:focus-visible {
+  border: 1px solid #fff;
+}
+
+.content__list-item:active {
+  background-color: #545050;
+}
+
+.content__list-item:has(.content__card-link_current) {
+  background-color: #545050;
 }
 
 .content__video-card {
   display: flex;
   align-items: start;
   justify-content: space-between;
+}
 
+.content__video-card-title {
+  font-family: 'Oswald';
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  flex-grow: 1;
+}
+
+.content__video-card-description-container {
+  overflow: hidden;
+  max-width: 196px;
+  flex-shrink: 0;
+  
+}
+
+.content__video-card-description {
+  line-height: 90%;
+  font-size: 18px;
+  font-weight: 400;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
 }
 
 .content__video-card-thumbnail {
@@ -118,6 +305,7 @@ ol {
   object-position: center;
 }
 
-.content__video-card-description-container {
-  flex-grow: 1;
+.more-button {
+  width: 100%;
+  margin-top: 30px;
 }
